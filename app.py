@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
 import base64
 import json
 import zlib
+
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -15,16 +16,16 @@ def card():
 
     if data_param:
         try:
-            # Padding für Base64 auffüllen
+            # Fill padding for Base64 decoding
             padded = data_param + "==="
 
-            # URL-safe Base64 → Bytes
+            # Base64 Decoding
             try:
                 compressed_bytes = base64.urlsafe_b64decode(padded)
             except Exception:
                 compressed_bytes = base64.b64decode(padded)
 
-            # Entpacken (Deflate)
+            # Decompression
             utf8_bytes = zlib.decompress(compressed_bytes)
 
             # UTF-8 String
@@ -40,9 +41,9 @@ def card():
                 greeting=data.get("greeting", "")
             )
         except json.JSONDecodeError as e:
-            return f"Fehler beim Parsen der JSON-Daten: {e}", 400
+            return f"Error while parsing UTF-8 data: {e}", 400
         except Exception as e:
-            return f"Fehler beim Decoden/Entpacken: {e}. Bitte überprüfen Sie den Link.", 400
+            return f"Error during decoding/decompression: {e}. Please check the link.", 400
 
 @app.route("/edit")
 def edit():

@@ -3,16 +3,18 @@
 {% block content %}
 <div class="card-container">
     <h1>🎄 Weihnachtskarten Editor 🎄</h1>
-    <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 30px;">Erstelle deine persönliche Weihnachtskarte</p>
-    
+    <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 30px;">Erstelle deine persönliche
+        Weihnachtskarte</p>
+
     <div class="editor">
         <div class="form-group">
             <div>
                 <label for="salutation">Anrede:</label>
                 <select name="salutation">
                     <option value="">--Anrede auswählen--</option>
-                    <option value="Lieber">Lieber</option>
                     <option value="Liebe">Liebe</option>
+                    <option value="Lieber">Lieber</option>
+                    <option value="Liebes">Liebes</option>
                 </select>
             </div>
             <div>
@@ -20,12 +22,12 @@
                 <input name="to_name" type="text" placeholder="Name des Empfängers">
             </div>
         </div>
-        
+
         <div class="form-group">
-            <label for="content">Weihnachtsbotschaft:</label>
+            <label for="content">Inhalt:</label>
             <textarea name="content" placeholder="Schreibe hier deine persönliche Weihnachtsbotschaft..."></textarea>
         </div>
-        
+
         <div class="form-group">
             <div>
                 <label for="greeting">Grußformel:</label>
@@ -44,7 +46,7 @@
         </div>
     </div>
 
-    <button id="btn-edit-done" class="holly">Karte erstellen</button>
+    <button id="btn-edit-done">Karte erstellen</button>
 
     <div id="qrcode"></div>
     <div id="link"></div>

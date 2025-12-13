@@ -1,5 +1,6 @@
 const editDoneButtonId = "btn-edit-done";
 
+// Credit: https://freefrontend.com/css-snow-effects/
 // Snowflake generation
 function createSnowflakes() {
   // Create snowflake area if it doesn't exist

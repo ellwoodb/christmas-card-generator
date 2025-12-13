@@ -371,11 +371,6 @@ button:active {
   color: #ff6b6b;
 }
 
-.holly::after {
-  content: "🎄";
-  margin-left: 5px;
-}
-
 /* Links */
 a {
   color: #4ecdc4;
