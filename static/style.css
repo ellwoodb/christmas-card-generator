@@ -233,6 +233,31 @@ button:active {
   }
 }
 
+/* Global: Border-Box verhindert Berechnungsfehler, die zu Überlauf führen */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Zusätzlicher Schutz gegen horizontales Überlaufen in der Karte */
+.christmas-card {
+  overflow-x: hidden; /* verhindert rechts abgeschnittenen Inhalt */
+}
+
+/* Inhalte in der Karte dürfen nie breiter als der Container werden */
+.christmas-card p,
+.christmas-card a,
+.christmas-card span,
+.christmas-card div {
+  max-width: 100%;
+}
+
+/* Links als Block begrenzen, damit lange URLs nicht herausragen */
+.christmas-card a {
+  display: inline-block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
@@ -366,6 +391,37 @@ button:active {
   }
 }
 
+/* Robustere Umbrüche innerhalb der Karte, damit Inhalte mobil nicht überlaufen */
+.christmas-card,
+.christmas-card * {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Bilder/Medien innerhalb der Karte responsiv skalieren */
+.christmas-card img,
+.christmas-card video,
+.christmas-card iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Leicht kleinere Schriftgrößen auf sehr kleinen Displays für bessere Passform */
+@media (max-width: 480px) {
+  .christmas-card {
+    font-size: 0.95em;
+  }
+
+  .christmas-card p:first-child {
+    font-size: 1.1em;
+  }
+
+  .christmas-card p:nth-child(2) {
+    font-size: 0.95em;
+  }
+}
+
 /* Weihnachtliche Akzente */
 .christmas-accent {
   color: #ff6b6b;
@@ -417,6 +473,11 @@ a:hover {
   position: relative;
   font-family: "Georgia", serif;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 12px;
 }
 
 .christmas-card::before {
@@ -457,6 +518,18 @@ a:hover {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin: 25px 0;
+}
+
+/* Flex-Optimierung für direkte Kindelemente */
+.christmas-card > * {
+  flex: 0 1 auto; /* erlaubt Schrumpfen und Umbruch */
+  min-width: 0; /* verhindert overflow durch lange Inhalte */
+}
+
+@media (max-width: 480px) {
+  .christmas-card {
+    gap: 10px;
+  }
 }
 
 /* Lange Links umbrechen, damit sie im Container bleiben */
