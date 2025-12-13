@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card-container">
+    <h1>🎄 Weihnachtskarten Editor 🎄</h1>
+    <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 30px;">Erstelle deine persönliche Weihnachtskarte</p>
+    
+    <div class="editor">
+        <div class="form-group">
+            <div>
+                <label for="salutation">Anrede:</label>
+                <select name="salutation">
+                    <option value="">--Anrede auswählen--</option>
+                    <option value="Lieber">Lieber</option>
+                    <option value="Liebe">Liebe</option>
+                </select>
+            </div>
+            <div>
+                <label for="to_name">Empfänger:</label>
+                <input name="to_name" type="text" placeholder="Name des Empfängers">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Weihnachtsbotschaft:</label>
+            <textarea name="content" placeholder="Schreibe hier deine persönliche Weihnachtsbotschaft..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div>
+                <label for="greeting">Grußformel:</label>
+                <select name="greeting">
+                    <option value="">--Gruß auswählen--</option>
+                    <option value="Liebe Grüße">Liebe Grüße</option>
+                    <option value="Mit freundlichen Grüßen">Mit freundlichen Grüßen</option>
+                    <option value="Frohe Weihnachten">Frohe Weihnachten</option>
+                    <option value="Besinnliche Grüße">Besinnliche Grüße</option>
+                </select>
+            </div>
+            <div>
+                <label for="from_name">Dein Name:</label>
+                <input name="from_name" type="text" placeholder="Dein Name">
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-edit-done" class="holly">Karte erstellen</button>
+
+    <div id="qrcode"></div>
+    <div id="link"></div>
+</div>
+{% endblock %}

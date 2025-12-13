@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card-container">
+    <h1>🎄 Weihnachtskarten Generator 🎄</h1>
+    <p style="text-align: center; color: #666; font-size: 1.2em; margin-bottom: 40px;">
+        Erstelle wunderschöne personalisierte Weihnachtskarten für deine Liebsten
+    </p>
+    
+    <div style="text-align: center; margin: 40px 0;">
+        <a href="/edit" style="text-decoration: none;">
+            <button class="holly" style="font-size: 1.3em; padding: 20px 40px;">
+                Neue Karte erstellen
+            </button>
+        </a>
+    </div>
+    
+    <div class="card-preview">
+        <h2>🎁 Beispiel Weihnachtskarte</h2>
+        <div class="content">
+            Liebe Familie,<br><br>
+            Ich wünsche euch allen frohe Weihnachten und ein gesegnetes neues Jahr! 
+            Möge diese besondere Zeit voller Liebe, Freude und schöner Momente mit euren Liebsten sein.
+        </div>
+        <div class="signature">
+            Mit herzlichen Grüßen,<br>
+            Max Mustermann ❄️
+        </div>
+    </div>
+</div>
+{% endblock %}
