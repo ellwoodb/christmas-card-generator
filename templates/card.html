@@ -3,7 +3,7 @@
 {% block content %}
 <div class="christmas-card">
     <p>{{ salutation }} {{ to_name }},</p>
-    <p>{{ content }}</p>
+    <p>{{ content | replace('\n','<br>') | safe }}</p>
     <p>{{ greeting }},<br>{{ from_name }}</p>
 </div>
 {% endblock %}
