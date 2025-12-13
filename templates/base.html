@@ -1,144 +1,151 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Weihnachtskarten</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/static/style.css">
-        <link rel="stylesheet" href="/static/snow.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-        <script>
-            const editDoneButtonId = "btn-edit-done";
-            
-            // Snowflake generation
-            function createSnowflakes() {
-                // Create snowflake area if it doesn't exist
-                let snowflakeArea = document.querySelector('.snowflake-area');
-                if (!snowflakeArea) {
-                    snowflakeArea = document.createElement('div');
-                    snowflakeArea.className = 'snowflake-area';
-                    document.body.appendChild(snowflakeArea);
-                }
 
-                const numberOfSnowflake = 250;
-                const numberOfSnowflakeMd = 50;
-                const numberOfSnowflakeLg = 50;
+<head>
+    <meta charset="utf-8">
+    <title>Weihnachtskarten</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/snow.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        const editDoneButtonId = "btn-edit-done";
 
-                // Generate CSS for snowflakes dynamically
-                let css = '';
-
-                // Regular snowflakes
-                for (let i = 1; i <= numberOfSnowflake; i++) {
-                    const left = Math.random() * 120 - 20;
-                    const blur = Math.floor(Math.random() * 2);
-                    const flickrDuration = (Math.random() * 20 + 20) / 10;
-                    const flickrDelay = Math.random() * 20 / -10;
-                    const fallDuration = (Math.random() * 100 + 50) / 5;
-                    const fallDelay = Math.random() * 100 / -5;
-                    
-                    css += `.snowflake._${i} { 
-                        left: ${left}vw; 
-                        filter: blur(${blur}px); 
-                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
-                    }\n`;
-
-                    // Create snowflake element
-                    const snowflake = document.createElement('div');
-                    snowflake.className = `snowflake _${i}`;
-                    snowflake.textContent = '❄';
-                    snowflakeArea.appendChild(snowflake);
-                }
-
-                // Medium snowflakes
-                for (let i = 1; i <= numberOfSnowflakeMd; i++) {
-                    const left = Math.random() * 120 - 20;
-                    const blur = Math.floor(Math.random() * 2);
-                    const flickrDuration = (Math.random() * 20 + 20) / 10;
-                    const flickrDelay = Math.random() * 20 / -10;
-                    const fallDuration = (Math.random() * 100 + 50) / 5;
-                    const fallDelay = Math.random() * 100 / -5;
-                    
-                    css += `.snowflake._md-${i} { 
-                        left: ${left}vw; 
-                        filter: blur(${blur}px); 
-                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
-                    }\n`;
-
-                    // Create snowflake element
-                    const snowflake = document.createElement('div');
-                    snowflake.className = `snowflake _md _md-${i}`;
-                    snowflake.textContent = '❄';
-                    snowflakeArea.appendChild(snowflake);
-                }
-
-                // Large snowflakes
-                for (let i = 1; i <= numberOfSnowflakeLg; i++) {
-                    const left = Math.random() * 120 - 20;
-                    const flickrDuration = (Math.random() * 20 + 20) / 10;
-                    const flickrDelay = Math.random() * 20 / -10;
-                    const fallDuration = (Math.random() * 100 + 50) / 5;
-                    const fallDelay = Math.random() * 100 / -5;
-                    
-                    css += `.snowflake._lg-${i} { 
-                        left: ${left}vw; 
-                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
-                    }\n`;
-
-                    // Create snowflake element
-                    const snowflake = document.createElement('div');
-                    snowflake.className = `snowflake _lg _lg-${i}`;
-                    snowflake.textContent = '❄';
-                    snowflakeArea.appendChild(snowflake);
-                }
-
-                // Add CSS to the page
-                const style = document.createElement('style');
-                style.textContent = css;
-                document.head.appendChild(style);
+        // Snowflake generation
+        function createSnowflakes() {
+            // Create snowflake area if it doesn't exist
+            let snowflakeArea = document.querySelector('.snowflake-area');
+            if (!snowflakeArea) {
+                snowflakeArea = document.createElement('div');
+                snowflakeArea.className = 'snowflake-area';
+                document.body.appendChild(snowflakeArea);
             }
 
-            document.addEventListener("DOMContentLoaded", () => {
-                // Create snowflakes
-                createSnowflakes();
+            const numberOfSnowflake = 250;
+            const numberOfSnowflakeMd = 50;
+            const numberOfSnowflakeLg = 50;
 
-                const editDoneButton = document.getElementById(editDoneButtonId);
-                if (editDoneButton) {
-                    editDoneButton.addEventListener("click", () => {
-                        const salutation = document.querySelector("select[name='salutation']").value;
-                        const toName = document.querySelector("input[name='to_name']").value;
-                        const content = document.querySelector("textarea[name='content']").value;
-                        const greeting = document.querySelector("select[name='greeting']").value;
-                        const fromName = document.querySelector("input[name='from_name']").value;
-                        
-                        const dataObj = {
-                            to_name: toName,
-                            content: content,
-                            from_name: fromName,
-                            salutation: salutation,
-                            greeting: greeting
-                        };
+            // Generate CSS for snowflakes dynamically
+            let css = '';
 
-                        // JSON → Base64 URL-safe
-                        const jsonStr = JSON.stringify(dataObj);
-                        let base64 = btoa(jsonStr)
-                            .replace(/\+/g, "-")
-                            .replace(/\//g, "_")
-                            .replace(/=+$/, ""); // URL-safe & ohne Padding
+            // Regular snowflakes
+            for (let i = 1; i <= numberOfSnowflake; i++) {
+                const left = Math.random() * 120 - 20;
+                const blur = Math.floor(Math.random() * 2);
+                const flickrDuration = (Math.random() * 20 + 20) / 10;
+                const flickrDelay = Math.random() * 20 / -10;
+                const fallDuration = (Math.random() * 100 + 50) / 5;
+                const fallDelay = Math.random() * 100 / -5;
 
-                        const cardUrl = `/card?data=${base64}`;
+                css += `.snowflake._${i} { 
+                        left: ${left}vw; 
+                        filter: blur(${blur}px); 
+                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                    }\n`;
 
-                        const qrcodeContainer = document.getElementById("qrcode");
-                        const linkContainer = document.getElementById("link");
-                        qrcodeContainer.innerHTML = "";
-                        linkContainer.innerHTML = `<p>Teile diesen Link zu deiner Karte: <a href="${window.location.origin + cardUrl}" target="_blank">${window.location.origin + cardUrl}</a></p>`;
-                        new QRCode(qrcodeContainer, window.location.origin + cardUrl);
-                    });
-                }
-            });      
-        </script>
-    </head>
-    <body>        
-        {% block content %}{% endblock %}
-    </body>
+                // Create snowflake element
+                const snowflake = document.createElement('div');
+                snowflake.className = `snowflake _${i}`;
+                snowflake.textContent = '❄';
+                snowflakeArea.appendChild(snowflake);
+            }
+
+            // Medium snowflakes
+            for (let i = 1; i <= numberOfSnowflakeMd; i++) {
+                const left = Math.random() * 120 - 20;
+                const blur = Math.floor(Math.random() * 2);
+                const flickrDuration = (Math.random() * 20 + 20) / 10;
+                const flickrDelay = Math.random() * 20 / -10;
+                const fallDuration = (Math.random() * 100 + 50) / 5;
+                const fallDelay = Math.random() * 100 / -5;
+
+                css += `.snowflake._md-${i} { 
+                        left: ${left}vw; 
+                        filter: blur(${blur}px); 
+                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                    }\n`;
+
+                // Create snowflake element
+                const snowflake = document.createElement('div');
+                snowflake.className = `snowflake _md _md-${i}`;
+                snowflake.textContent = '❄';
+                snowflakeArea.appendChild(snowflake);
+            }
+
+            // Large snowflakes
+            for (let i = 1; i <= numberOfSnowflakeLg; i++) {
+                const left = Math.random() * 120 - 20;
+                const flickrDuration = (Math.random() * 20 + 20) / 10;
+                const flickrDelay = Math.random() * 20 / -10;
+                const fallDuration = (Math.random() * 100 + 50) / 5;
+                const fallDelay = Math.random() * 100 / -5;
+
+                css += `.snowflake._lg-${i} { 
+                        left: ${left}vw; 
+                        animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                    }\n`;
+
+                // Create snowflake element
+                const snowflake = document.createElement('div');
+                snowflake.className = `snowflake _lg _lg-${i}`;
+                snowflake.textContent = '❄';
+                snowflakeArea.appendChild(snowflake);
+            }
+
+            // Add CSS to the page
+            const style = document.createElement('style');
+            style.textContent = css;
+            document.head.appendChild(style);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Create snowflakes
+            createSnowflakes();
+
+            const editDoneButton = document.getElementById(editDoneButtonId);
+            if (editDoneButton) {
+                editDoneButton.addEventListener("click", () => {
+                    const salutation = document.querySelector("select[name='salutation']").value;
+                    const toName = document.querySelector("input[name='to_name']").value;
+                    const content = document.querySelector("textarea[name='content']").value;
+                    const greeting = document.querySelector("select[name='greeting']").value;
+                    const fromName = document.querySelector("input[name='from_name']").value;
+
+                    const dataObj = {
+                        to_name: toName,
+                        content: content,
+                        from_name: fromName,
+                        salutation: salutation,
+                        greeting: greeting
+                    };
+
+                    // JSON → Base64 URL-safe (UTF-8 kompatibel)
+                    const jsonStr = JSON.stringify(dataObj);
+
+                    // Sichere UTF-8 zu Base64 Konvertierung
+                    // 1. Erst URI-encode (behandelt UTF-8 korrekt)
+                    // 2. Dann zu Base64
+                    const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
+                        .replace(/\+/g, "-")
+                        .replace(/\//g, "_")
+                        .replace(/=+$/, ""); // URL-safe & ohne Padding
+
+                    const cardUrl = `/card?data=${base64}`;
+
+                    const qrcodeContainer = document.getElementById("qrcode");
+                    const linkContainer = document.getElementById("link");
+                    qrcodeContainer.innerHTML = "";
+                    linkContainer.innerHTML = `<p>Teile diesen Link zu deiner Karte: <a href="${window.location.origin + cardUrl}" target="_blank">${window.location.origin + cardUrl}</a></p>`;
+                    new QRCode(qrcodeContainer, window.location.origin + cardUrl);
+                });
+            }
+        });      
+    </script>
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+
 </html>

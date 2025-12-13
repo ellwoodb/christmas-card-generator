@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import base64
 import json
+import urllib.parse
 
 app = Flask(__name__)
 
@@ -17,7 +18,17 @@ def card():
             # Padding für Base64 auffüllen
             padded = data_param + "==="
 
-            decoded_json = base64.urlsafe_b64decode(padded).decode("utf-8")
+            # Versuche zuerst urlsafe_b64decode
+            try:
+                decoded_bytes = base64.urlsafe_b64decode(padded)
+            except Exception:
+                # Falls das fehlschlägt, versuche standard b64decode
+                decoded_bytes = base64.b64decode(padded)
+            
+            # Dekodiere von Latin-1 zu String (was btoa/atob erwartet)
+            # dann URI-decode für UTF-8
+            decoded_latin1 = decoded_bytes.decode("latin-1")
+            decoded_json = urllib.parse.unquote(decoded_latin1)
             data = json.loads(decoded_json)
 
             return render_template(
@@ -28,8 +39,10 @@ def card():
                 salutation=data.get("salutation", ""),
                 greeting=data.get("greeting", "")
             )
+        except json.JSONDecodeError as e:
+            return f"Fehler beim Parsen der JSON-Daten: {e}", 400
         except Exception as e:
-            return f"Fehler beim Decoden: {e}", 400
+            return f"Fehler beim Decoden: {e}. Bitte überprüfen Sie den Link.", 400
 
     # Fallback: alte Klartext-URL
     # content = request.args.get("content", "Frohe Weihnachten!")
