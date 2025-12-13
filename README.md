@@ -2,6 +2,13 @@
 
 Eine kleine Web-App zum Erstellen von digitalen Weihnachtskarten. Inhalte (Anrede, Name, Nachricht, Gruß) werden erfasst, komprimiert und als Link/QR-Code geteilt. Die Karte kann über den Link im Browser angezeigt werden.
 
+## Repository klonen
+
+```bash
+git clone https://github.com/ellwoodb/christmas-card-generator.git
+cd christmas-card-generator
+```
+
 ## Voraussetzungen
 
 - Python 3.10+ installiert
