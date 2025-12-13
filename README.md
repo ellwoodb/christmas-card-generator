@@ -23,7 +23,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Die Anwendung ist danach unter http://localhost:8080 erreichbar.
+Die App ist danach unter http://localhost:8080 erreichbar.
 
 ## Tech-Stack
 
@@ -34,6 +34,19 @@ Die Anwendung ist danach unter http://localhost:8080 erreichbar.
   - Statische Assets in `static/` (`style.css`, `snow.css`, `app.js`)
   - Externe Libraries: QRCode.js (für QR-Codes), pako (für Deflate-Komprimierung)
   - Dynamische Effekte: Schneeflocken-Animation und QR-Link-Erzeugung im Browser
+
+## Docker
+
+### Mit Docker Compose
+
+```bash
+# Build und Start
+docker compose up --build -d
+# Stop
+docker compose down
+```
+
+Die App ist danach unter http://localhost:8080 erreichbar.
 
 ## Credits
 
