@@ -236,6 +236,32 @@ button:active {
   }
 }
 
+/* Performance-Optimierungen für Schneeflocken auf mobilen Geräten */
+@media (max-width: 768px) {
+  .snowflake-area {
+    will-change: transform;
+    transform: translateZ(0); /* Hardware-Beschleunigung aktivieren */
+  }
+
+  .snowflake {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Reduziere Animationsgeschwindigkeit auf mobilen Geräten */
+  .snowflake * {
+    animation-duration: 1.5s !important;
+  }
+}
+
+/* Hardware-Beschleunigung für alle Schneeflocken */
+.snowflake {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* Global: Border-Box verhindert Berechnungsfehler, die zu Überlauf führen */
 *,
 *::before,

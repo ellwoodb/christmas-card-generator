@@ -11,9 +11,11 @@ function createSnowflakes() {
     document.body.appendChild(snowflakeArea);
   }
 
-  const numberOfSnowflake = 250;
-  const numberOfSnowflakeMd = 50;
-  const numberOfSnowflakeLg = 50;
+  // Reduziere Schneeflocken auf mobilen Geräten für bessere Performance
+  const isMobile = window.innerWidth <= 768;
+  const numberOfSnowflake = isMobile ? 50 : 250;
+  const numberOfSnowflakeMd = isMobile ? 15 : 50;
+  const numberOfSnowflakeLg = isMobile ? 15 : 50;
 
   // Generate CSS for snowflakes dynamically
   let css = "";
@@ -29,8 +31,9 @@ function createSnowflakes() {
 
     css += `.snowflake._${i} { 
                 left: ${left}vw; 
-                filter: blur(${blur}px); 
-                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                ${isMobile ? "" : `filter: blur(${blur}px);`}
+                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite;
+                will-change: transform;
             }\n`;
 
     // Create snowflake element
@@ -51,8 +54,9 @@ function createSnowflakes() {
 
     css += `.snowflake._md-${i} { 
                 left: ${left}vw; 
-                filter: blur(${blur}px); 
-                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                ${isMobile ? "" : `filter: blur(${blur}px);`}
+                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite;
+                will-change: transform;
             }\n`;
 
     // Create snowflake element
@@ -72,7 +76,8 @@ function createSnowflakes() {
 
     css += `.snowflake._lg-${i} { 
                 left: ${left}vw; 
-                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite; 
+                animation: ${flickrDuration}s flickr ${flickrDelay}s infinite, ${fallDuration}s fall ${fallDelay}s infinite;
+                will-change: transform;
             }\n`;
 
     // Create snowflake element
