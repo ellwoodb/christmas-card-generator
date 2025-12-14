@@ -459,6 +459,11 @@ a:hover {
   align-items: end;
 }
 
+/* Spezielle Regel für die Textarea-Gruppe - soll nicht flex sein */
+.editor .form-group:has(textarea) {
+  display: block !important;
+}
+
 .editor > div > * {
   flex: 1;
 }
