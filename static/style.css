@@ -158,11 +158,14 @@ button:active {
 /* QR Code Container */
 #qrcode {
   text-align: center;
-  margin: 30px 0;
+  margin: 30px auto;
   padding: 20px;
   background: #f8f9fa;
   border-radius: 10px;
   border: 2px dashed #4ecdc4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Weihnachtskarte Vorschau */
@@ -542,4 +545,10 @@ a:hover {
 #link a {
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+/* Zentriere den "Karte erstellen" Button */
+#btn-edit-done {
+  display: block;
+  margin: 20px auto;
 }
