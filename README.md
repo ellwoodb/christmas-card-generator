@@ -74,3 +74,4 @@ Die App ist danach unter http://localhost:8080 erreichbar.
 - QR-Code: QRCode.js (CDN: https://cdnjs.com/libraries/qrcodejs)
 - Komprimierung: pako (CDN: https://cdnjs.com/libraries/pako)
 - Snowflake-Effekt: Inspiration/Beispiele von https://freefrontend.com/css-snow-effects/
+- Weihnachtsbaum Icon: https://www.svgrepo.com/svg/404966/christmas-tree
