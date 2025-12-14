@@ -55,6 +55,20 @@ docker compose down
 
 Die App ist danach unter http://localhost:8080 erreichbar.
 
+## Screenshots
+
+### Home
+
+<img src="screenshots/home.png" />
+
+### Editor
+
+<img src="screenshots/editor.png" />
+
+### Card
+
+<img src="screenshots/card.png" />
+
 ## Credits
 
 - QR-Code: QRCode.js (CDN: https://cdnjs.com/libraries/qrcodejs)
