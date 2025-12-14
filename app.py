@@ -25,8 +25,13 @@ def card():
             except Exception:
                 compressed_bytes = base64.b64decode(padded)
 
-            # Decompression
-            utf8_bytes = zlib.decompress(compressed_bytes)
+            # Decompression - versuche erst raw deflate, dann zlib
+            try:
+                # Raw deflate (windowBits: -15 vom JavaScript)
+                utf8_bytes = zlib.decompress(compressed_bytes, -15)
+            except zlib.error:
+                # Fallback für alte zlib-komprimierte Daten
+                utf8_bytes = zlib.decompress(compressed_bytes)
 
             # UTF-8 String
             decoded_json = utf8_bytes.decode("utf-8")
