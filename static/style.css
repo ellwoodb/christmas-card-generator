@@ -296,7 +296,7 @@ button:active {
 }
 
 /* Extra Mobile-Optimierung für sehr schmale Displays */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   html,
   body {
     padding: 8px;
@@ -327,6 +327,10 @@ button:active {
     gap: 10px;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .editor > div > * {
+    width: 100%;
   }
 
   label {
