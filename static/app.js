@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // UTF-8 Bytes
       const utf8Bytes = new TextEncoder().encode(jsonStr);
-      // Deflate-Komprimierung
-      const deflated = pako.deflate(utf8Bytes);
+      // Deflate-Komprimierung mit maximaler Kompression
+      const deflated = pako.deflate(utf8Bytes, { level: 9, windowBits: -15 });
       // Base64 URL-safe ohne Padding
       const base64Url = uint8ToBase64Url(deflated);
 
@@ -142,7 +142,16 @@ document.addEventListener("DOMContentLoaded", () => {
       linkContainer.innerHTML = `<p>Teile diesen Link zu deiner Karte: <a href="${
         window.location.origin + cardUrl
       }" target="_blank">${window.location.origin + cardUrl}</a></p>`;
-      new QRCode(qrcodeContainer, window.location.origin + cardUrl);
+
+      // QR-Code mit optimierten Einstellungen für längere URLs
+      new QRCode(qrcodeContainer, {
+        text: window.location.origin + cardUrl,
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.L, // Niedrigste Fehlerkorrektur = mehr Datenkapazität
+      });
     });
   }
 });
